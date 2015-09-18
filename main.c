@@ -36,19 +36,19 @@ int main() {
     
     
     
-    //DEBUGGING TEST CODE -- basically tests that the timer frequency is 2 seconds
-    TRISDbits.TRISD13 = 1;
-    TRISDbits.TRISD1 = 0;
-    CNPUDbits.CNPUD13 = 1;
-    initTimer1();
-    timer1On();
-    while(1){
-        if (IFS0bits.T1IF)
-        {
-            IFS0bits.T1IF = 0;
-            LATDbits.LATD1 = !LATDbits.LATD1;
-        }
-    }
+    //DEBUGGING TEST CODE -- basically tests that the timer frequency is 2 
+//    TRISDbits.TRISD13 = 1;
+//    TRISDbits.TRISD1 = 0;
+//    CNPUDbits.CNPUD13 = 1;
+//    initTimer1();
+//    timer1On();
+//    while(1){
+//        if (IFS0bits.T1IF)
+//        {
+//            IFS0bits.T1IF = 0;
+//            LATDbits.LATD1 = !LATDbits.LATD1;
+//        }
+//    }
     
    
 
