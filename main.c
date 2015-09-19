@@ -1,7 +1,7 @@
 /* 
  * File:   main.c
- * Author: gvanhoy
- * Description: lab 0.
+ * Author: Kennon McKeever
+ * Description: lab 0 - see readme
  * Created on August 27, 2015, 10:14 AM
  */
 
@@ -19,7 +19,6 @@
 //TODO: Define states of the state machine
 typedef enum stateTypeEnum{
     init, waitPress, waitRelease, dec, inc 
-    //led1, led2, led3, wait, wait2, debouncePress, debounceRelease, debounceRelease2
 } stateType;
 
 stateType state = init;
@@ -33,26 +32,9 @@ int main() {
     initSwitch1();
     initLEDs();
     initTimer1();
-    
-    
-    
-    //DEBUGGING TEST CODE -- basically tests that the timer frequency is 2 
-    TRISDbits.TRISD13 = 1;
-    TRISDbits.TRISD1 = 0;
-    CNPUDbits.CNPUD13 = 1;
-    initTimer1();
-    initTimer2();
-    timer1On();
-    while(1){
-        delayMs(1000); //delay 1 second
-        LATDbits.LATD1 = !LATDbits.LATD1;
-    }
-    
-   
-
-    
+        
     //current LED that is on
- int curr_led = 0;
+    int curr_led = 0;
    
     while(1){
 //        LATDbits.LATD2 = !LATDbits.LATD2;
@@ -73,7 +55,6 @@ int main() {
                 }
                 break;
             case waitRelease:
-                
                 if(PORTDbits.RD6 == 1) //1 means released in this case because of the pull-up
                 {
                     state = inc; //for debugging purposes

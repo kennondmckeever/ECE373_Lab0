@@ -6,6 +6,7 @@
  */
 
 #include <xc.h>
+#include "timer.h"
 
 #define ENABLED 1
 #define DISABLED 0
@@ -13,8 +14,8 @@
 #define T1PS_256 3
 #define T2PS_1 0
 
-#define SET 1
-#define RESET 0
+#define SET FLAG_SET
+#define RESET FLAG_RESET
 
 #define INTERNAL_CLOCK 0
 

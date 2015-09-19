@@ -15,10 +15,7 @@
 #define INPUT 1
 
 void initLEDs(){
-    
-    //initialize all three LEDs
-    //TRISD &= ; //could use something like this to set all of the pins to inputs or outputs at once
-    TRISDbits.TRISD0 = OUTPUT; //0 for output
+    TRISDbits.TRISD0 = OUTPUT;
     TRISDbits.TRISD1 = OUTPUT;
     TRISDbits.TRISD2 = OUTPUT;
     LATDbits.LATD0 = LED_OFF;
