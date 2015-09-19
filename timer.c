@@ -20,7 +20,7 @@
 #define INTERNAL_CLOCK 0
 
 void initTimer1(){
-    //TODO: Initialize Timer 1 to have a period of
+    //Initialize Timer 1 to have a period of
     // 2 seconds. Enable its interrupt
     T1CONbits.ON = DISABLED; //turn it off. We'll turn it on before we want to use it.
     T1CONbits.TCKPS = T1PS_256; //set pre-scaler to 256
@@ -44,6 +44,8 @@ void timer1Off()
     TMR1 = 0; //clear the counting register just in case
 }
 
+//I've maid timer2 be 1ms so that the delayMs() function can be anywhere from 1ms to 2.15 million seconds
+
 initTimer2(){
     T2CONbits.ON = DISABLED; //turn it off
     TMR2 = 0; //clear its counting register
@@ -54,15 +56,14 @@ initTimer2(){
 }
 
 delayMs(int delay){
-    //TODO: Using timer 2, create a delay
-    // that is 1 ms.
-    initTimer2(); //just in case they've forgotten to initialize it themselves
+    initTimer2(); //just in case they've forgotten to initialize the timer themselves    
+
     //reset flag, set the timer, etc.
     TMR2 = 0;
     IFS0bits.T2IF = RESET;
     T2CONbits.ON = ENABLED;
     
-    //cycle through this delay milliseconds. This makes a timer that can be delayed up to 2 million seconds
+    //cycle through this for {delay} milliseconds. This makes a timer that can be delayed up to 2 million seconds
     for( ; delay > 0; --delay)
     {
         while(IFS0bits.T2IF == RESET);

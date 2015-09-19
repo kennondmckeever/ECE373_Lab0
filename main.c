@@ -28,13 +28,12 @@ int main() {
     //This function is necessary to use interrupts. 
     enableInterrupts();
     
-    //TODO: Write each initialization function
     initSwitch1();
     initLEDs();
     initTimer1();
         
-    //current LED that is on
-    int curr_led = 0;
+    int curr_led = 0; //current LED that is on
+    
    
     while(1){
 //        LATDbits.LATD2 = !LATDbits.LATD2;
@@ -48,20 +47,22 @@ int main() {
                 state = waitPress;
                 break;
             case waitPress:
-                if(PORTDbits.RD6 == 0) //0 is pressed because of the internal pull-up
+                if(SWITCH1 == SWITCH_PRESSED) //0 is pressed because of the internal pull-up
                 {
                     state = waitRelease;
                     timer1On();
+                    delayMs(10); //debounce. Do this after the timer is started to make the 2s check be accurate
                 }
                 break;
             case waitRelease:
-                if(PORTDbits.RD6 == 1) //1 means released in this case because of the pull-up
+                if(SWITCH1 == SWITCH_NOT_PRESSED) //1 means released in this case because of the pull-up
                 {
                     state = inc; //for debugging purposes
                     
-                    state = IFS0bits.T1IF ? dec : inc;
+                    state = IFS0bits.T1IF ? dec : inc; //check the timer
                     IFS0bits.T1IF = 0; //reset the flag
                     timer1Off();
+                    delayMs(10); //debounce after timer is checked
                 }
                 break;
             case dec:
