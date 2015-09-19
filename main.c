@@ -41,13 +41,11 @@ int main() {
     TRISDbits.TRISD1 = 0;
     CNPUDbits.CNPUD13 = 1;
     initTimer1();
+    initTimer2();
     timer1On();
     while(1){
-        if (IFS0bits.T1IF)
-        {
-            IFS0bits.T1IF = 0;
-            LATDbits.LATD1 = !LATDbits.LATD1;
-        }
+        delayMs(1000); //delay 1 second
+        LATDbits.LATD1 = !LATDbits.LATD1;
     }
     
    

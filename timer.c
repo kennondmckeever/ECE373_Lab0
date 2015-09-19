@@ -49,13 +49,13 @@ initTimer2(){
     T2CONbits.TCKPS = INTERNAL_CLOCK;// set the pre-scaler to 1
     T2CONbits.TCS = T2PS_1;
     IFS0bits.T2IF = RESET;
-    PR2 = 6666; //clcok is 8MHZ * 20 / 12 / 2 / 1 * 1ms - 1 = 6665.667
+    PR2 = 624; //clcok is 625k/ 1(pre-scaler) * 1ms - 1 = 624
 }
 
 delayMs(int delay){
     //TODO: Using timer 2, create a delay
     // that is 1 ms.
-    
+    initTimer2(); //just in case they've forgotten to initialize it themselves
     //reset flag, set the timer, etc.
     TMR2 = 0;
     IFS0bits.T2IF = RESET;
